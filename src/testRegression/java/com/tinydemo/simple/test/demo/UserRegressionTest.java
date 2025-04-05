@@ -36,7 +36,7 @@ class UserRegressionTest {
 
         // 查询用户
         ResponseEntity<List<User>> getResponse = restTemplate.exchange(
-                "/api/users",
+                apiUrl + "/api/users",
                 HttpMethod.GET,
                 null,
                 new ParameterizedTypeReference<>() {
@@ -47,7 +47,7 @@ class UserRegressionTest {
         // 删除用户
         restTemplate.delete(apiUrl + "/api/users/" + createResponse.getBody().getId());
         ResponseEntity<List<User>> afterDelete = restTemplate.exchange(
-                "/api/users",
+                apiUrl + "/api/users",
                 HttpMethod.GET,
                 null,
                 new ParameterizedTypeReference<>() {

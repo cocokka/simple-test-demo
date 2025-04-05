@@ -1,4 +1,4 @@
-package com.tinydemo.simple.test.demo.controller;
+package com.tinydemo.simple.test.demo;
 
 import com.tinydemo.simple.test.demo.entity.User;
 import org.junit.jupiter.api.MethodOrderer;
@@ -26,6 +26,7 @@ import static org.springframework.boot.test.context.SpringBootTest.WebEnvironmen
 @TestMethodOrder(MethodOrderer.OrderAnnotation.class)
 @Sql(scripts = "/test-data.sql", executionPhase = Sql.ExecutionPhase.BEFORE_TEST_CLASS)
 class UserControllerIntegrationTest {
+
     @Autowired
     private TestRestTemplate restTemplate;
 
@@ -36,7 +37,7 @@ class UserControllerIntegrationTest {
                 "/api/users",
                 HttpMethod.GET,
                 null,
-                new ParameterizedTypeReference<List<User>>() {
+                new ParameterizedTypeReference<>() {
                 }
         );
         assertThat(response.getBody()).hasSize(2); // 根据 test-data.sql 中的数据验证
@@ -45,9 +46,11 @@ class UserControllerIntegrationTest {
     @Test
     @Order(2)
     void testUpdateUser() {
-        /*User user = new User(1L, "Bob Updated", "bob@example.com");
+        ResponseEntity<User> originalUser = restTemplate.getForEntity("/api/users/1", User.class);
+        assertThat(originalUser.getBody().getName()).isEqualTo("Bob");
+        User user = new User(1L, "Bob Updated", "bob@example.com");
         restTemplate.put("/api/users/1", user);
         ResponseEntity<User> updatedUser = restTemplate.getForEntity("/api/users/1", User.class);
-        assertThat(updatedUser.getBody().getName()).isEqualTo("Bob Updated");*/
+        assertThat(updatedUser.getBody().getName()).isEqualTo("Bob Updated");
     }
 }

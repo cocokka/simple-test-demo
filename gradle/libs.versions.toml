@@ -1,0 +1,8 @@
+# gradle/libs.versions.toml
+[versions]
+mybatisSpringBoot = "3.0.4"
+
+
+[libraries]
+mybatis-spring-boot-starter = { module = "org.mybatis.spring.boot:mybatis-spring-boot-starter", version.ref = "mybatisSpringBoot" }
+mybatis-spring-boot-starter-test = { module = "org.mybatis.spring.boot:mybatis-spring-boot-starter-test", version.ref = "mybatisSpringBoot" }
