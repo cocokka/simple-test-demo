@@ -48,8 +48,8 @@ Automatically load schema.sql 和 test-data.sql in test environment.
 * username: sa
 * password:
 
-#### Gradle
+#### CI/CD
 
-* [Gradle Build Scans – insights for your project's build](https://scans.gradle.com#gradle)]
-* [Testcontainers at development time](https://docs.spring.io/spring-boot/3.4.4/reference/features/dev-services.html#features.dev-services.testcontainers)
-* Jacoco
+* run build(including test and integration) ```./gradlew clean build --stacktrace```
+* run testIntegration ```./gradlew clean testIntegration --stacktrace```
+* run testRegression ```./gradlew clean testRegression --stacktrace```
